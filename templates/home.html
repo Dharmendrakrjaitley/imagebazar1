@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+    crossorigin="anonymous">
+
+    <title>My ImageBazar</title>
+
+    <style>
+        .bg{
+            background:#ffeb3b!important;
+        }
+
+        .list-group-item.active{
+            background:#ffff66!important;
+            color: black;
+            border-color: #ffeb3b!important;
+        }
+        .dropdown-item:hover{
+          background-color:#ffff66;
+        }
+        .list-group-item:hover{
+          background-color:#ffff66;
+        }
+    </style>
+
+  </head>
+  <body>
+     {% include 'navbar.html' %}
+    
+    <!-- main code -->
+
+   <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <!-- categories -->
+
+
+            <div class="list-group mt-4">
+
+                <a href="/home" class="list-group-item list-group-item-action active">
+                    All Images
+                  </a>
+                {% for c in cats %}
+
+                <a href="/category/{{c.pk}}" class="list-group-item list-group-item-action">{{c.title}}</a>
+
+                {% endfor %}
+              </div>
+
+        </div>
+
+        <div class="col-md-10">
+            <!-- images -->
+
+            <div class="row mt-4">
+
+                <div class="col-md-12">
+
+                    <div class="card-columns">
+                        {%for i in images%}
+
+                        
+                        <div class="card" style="width: 18rem;">
+                            <img src="/media/{{i.image}}"class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">{{i.title}}</h5>
+                              <p class="card-text">{{i.description}}</p>
+                              <a href="#" class="btn btn-primary" onclick="showModalwithImage('{{i.image}}')">View</a>
+                            </div>
+                          </div>
+
+                        {%endfor%}
+    
+    
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal" id="image_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">My ImageBazar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <img src="#" id="image-show" class="img-fluid" alt="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  <script>
+    function showModalwithImage(imageurl)
+    {
+        $('#image_modal').modal('show')
+        $("#image-show").attr('src',`/media/${imageurl}`) 
+    }
+
+
+  </script>
+<div style="background-color:black; color: white;">
+<center><h2>All rights reserved to Jaitley Pvt Ltd(2020)</h2></center>
+</div>
+  </body>
+</html>
